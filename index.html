@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+	<title>spasiba_vladivostok</title>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  	<!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script> -->
+
+  	<!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+<!-- 외부 플러그인 주소 -->
+	<!-- Add fancyBox -->
+	<link rel="stylesheet" href="fancybox/source/jquery.fancybox.css?v=2.1.7" type="text/css" media="screen" />
+	<script type="text/javascript" src="fancybox/source/jquery.fancybox.pack.js?v=2.1.7"></script>
+
+	<!-- Optionally add helpers - button, thumbnail and/or media -->
+	<link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-buttons.css?v=1.0.5" type="text/css" media="screen" />
+	<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-buttons.js?v=1.0.5"></script>
+	<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-media.js?v=1.0.6"></script>
+
+	<link rel="stylesheet" href="fancybox/source/helpers/jquery.fancybox-thumbs.css?v=1.0.7" type="text/css" media="screen" />
+	<script type="text/javascript" src="fancybox/source/helpers/jquery.fancybox-thumbs.js?v=1.0.7"></script>
+
+  	<style>
+  		*{
+  			margin: 0;
+  			padding: 0;
+  		}
+  		ul li, ol li{
+  			list-style: none;
+  			overflow: hidden;
+  		}
+  		/*배경*/
+  		#wrapper{
+  			width: 100%;
+  		}
+  		#wrapper>section{
+  			width: 100%;
+  			height: 980px;
+  		}
+  		#wrapper>section:nth-of-type(1){
+  			background: url(img/bg_1.png) no-repeat center;
+  			height: 980px;
+  			top: 0;
+  		}
+  		#wrapper>section:nth-of-type(2){
+  			background: url(img/bg_2.png) no-repeat center;
+  			height: 980px;
+  			top: 980;
+  		}
+  		#wrapper>section:nth-of-type(3){
+  			background: url(img/bg_3.png) no-repeat center;
+  			height: 980px;
+  			top: 1960;
+  		}
+  		#wrapper>section:nth-of-type(4){
+  			background: url(img/bg_4.png) no-repeat center;
+  			height: 980px;
+  			top: 2940;
+  			overflow: hidden;
+  		}
+  		#wrapper>section:nth-of-type(5){
+  			background: url(img/bg_5.png) no-repeat center;
+  			height: 980px;
+  			top: 3920;
+  		}
+  		#wrapper>section:nth-of-type(6){
+  			background: url(img/bg_6.png) no-repeat center;
+  			height: 980px;
+  			top: 4900;
+  			overflow: hidden;
+  		}
+
+  		/*하단네비*/
+  		#wrapper #nav_lnb{
+  			width: 1055px;
+  			height: 61px;
+  			background: url(img/lnb/train_rail.png) no-repeat center;
+  			position: absolute;
+  			bottom: 80px;
+  			left: 50%;
+  			margin-left: -527.5px;
+  			z-index: 11;
+  		}
+  		nav.lnb{
+  			width: 1055px;
+  			height: 200px;
+  			position: absolute;
+  		}
+  		.lnb li{
+  			width: 10%;
+  			height: 100px;
+  			float: left;
+  			position: relative;
+  			box-sizing: border-box;
+  			left: 50px;
+  			margin: 15px 46px 0 46px;
+  		}
+  		nav a{
+  			width: 100%;
+  			height: 100%;
+  			display: block;
+  			text-indent: -99999px;
+  		}
+  		.lnb li{
+  			z-index: 10;
+  		}
+  		.lnb li:nth-child(1){
+  			width: 91px;
+  			height: 112px;
+  			background: url(img/lnb/pozi1.png);
+  		}
+  		.lnb li:nth-child(2){
+  			width: 91px;
+  			height: 112px;
+  			background: url(img/lnb/pozi2.png);
+  		}
+  		.lnb li:nth-child(3){
+  			width: 91px;
+  			height: 112px;
+  			background: url(img/lnb/pozi3.png);
+  		}
+  		.lnb li:nth-child(4){
+  			width: 91px;
+  			height: 112px;
+  			background: url(img/lnb/pozi4.png);
+  		}
+  		.lnb li:nth-child(5){
+  			width: 91px;
+  			height: 112px;
+  			background: url(img/lnb/pozi5.png);
+  		}
+  		
+  		/*하단네비 hover*/
+  		.lnb li:nth-child(1):hover{
+  			width: 103px;
+  			height: 192px;
+  			background: url(img/lnb/vladi.png);
+  			bottom: 65px;
+  			margin: 0 40px 0 40px;
+  		}
+  		.lnb li:nth-child(2):hover{
+  			width: 103px;
+  			height: 193px;
+  			background: url(img/lnb/let.png);
+  			bottom: 65px;
+  			margin: 0 40px 0 40px;
+  		}
+  		.lnb li:nth-child(3):hover{
+  			width: 103px;
+  			height: 191px;
+  			background: url(img/lnb/event.png);
+  			bottom: 65px;
+  			margin: 0 40px 0 40px;
+  		}
+  		.lnb li:nth-child(4):hover{
+  			width: 103px;
+  			height: 191px;
+  			background: url(img/lnb/review.png);
+  			bottom: 65px;
+  			margin: 0 40px 0 40px;
+  		}
+  		.lnb li:nth-child(5):hover{
+  			width: 103px;
+  			height: 189px;
+  			background: url(img/lnb/what.png);
+  			bottom: 65px;
+  			margin: 0 40px 0 40px;
+  		}
+
+  		/*하단네비 호버시 애니메이션*/
+  		.lnb li:nth-child(1):hover{
+			width: 107.333px;
+			height: 182px;
+			background: url(img/lnb/vladi_on.png);
+			bottom:65px;
+			margin: 0 40px 0 40px;
+			animation: vladi 1s steps(3) infinite;
+		}
+		@keyframes vladi{
+			0%{}
+			100%{background-position: -322px}
+		}
+		.lnb li:nth-child(2):hover{
+			width: 107.333px;
+			height: 183px;
+			background: url(img/lnb/let_on.png);
+			bottom:65px;
+			margin: 0 40px 0 40px;
+			animation: let 1s steps(3) infinite;
+		}
+		@keyframes let{
+			0%{}
+			100%{background-position: -322px}
+		}
+		.lnb li:nth-child(3):hover{
+			width: 107.333px;
+			height: 183px;
+			background: url(img/lnb/event_on.png);
+			bottom:65px;
+			margin: 0 40px 0 40px;
+			animation: event 1s steps(3) infinite;
+		}
+		@keyframes event{
+			0%{}
+			100%{background-position: -322px}
+		}
+		.lnb li:nth-child(4):hover{
+			width: 107.333px;
+			height: 183px;
+			background: url(img/lnb/review_on.png);
+			bottom:65px;
+			margin: 0 40px 0 40px;
+			animation: review 1s steps(3) infinite;
+		}
+		@keyframes review{
+			0%{}
+			100%{background-position: -322px}
+		}
+		.lnb li:nth-child(5):hover{
+			width: 107.333px;
+			height: 183px;
+			background: url(img/lnb/what_on.png);
+			bottom:65px;
+			margin: 0 40px 0 40px;
+			animation: what 1s steps(3) infinite;
+		}
+		@keyframes what{
+			0%{}
+			100%{background-position: -322px}
+		}
+
+		/*열차 움직임*/
+		#nav_lnb .train_move{
+			width: 308.25px;
+			height: 202px;
+			position: absolute;
+			bottom:160px;
+			left:0;
+			transition:left 1s;
+		}
+		#nav_lnb .train{
+			width: 308.25px;
+			height: 202px;
+			background: url(img/lnb/trainms.png) no-repeat;
+			/*border: 1px solid*/ pink;
+			z-index: 2;
+			position: absolute;
+			bottom:0;
+			animation: train 1s steps(4) infinite;
+		}
+		@keyframes train{
+			from{}
+			to{background-position: -1233px 0}
+		}
+		#nav_lnb li:nth-child(1):hover~.train_move{
+			left:30px;
+		}
+		#nav_lnb li:nth-child(2):hover~.train_move{
+			left:180px;
+		}
+		#nav_lnb li:nth-child(3):hover~.train_move{
+			left:370px;
+		}
+		#nav_lnb li:nth-child(4):hover~.train_move{
+			left:560px;
+		}
+		#nav_lnb li:nth-child(5):hover~.train_move{
+			left:750px;
+		}
+
+		/*우측 고정네비*/
+		#wrapper #nav_gnb{
+			width: 141px;
+			height: 583px;
+			background: url(img/gnb/rail.png) no-repeat center;
+			position: fixed;
+			right: 50px;
+			top: 50%;
+			margin-top: -320px;
+			z-index: 20;
+		}
+		nav.gnb{
+			width: 103px;
+			height: 503px;
+			padding: 10px;
+			position: absolute;
+			top: 35px;
+		}
+		.gnb li{
+			width: 40%;
+			height: 60px;
+			position: relative;
+			box-sizing: border-box;
+			transition: left 1s;
+			z-index: 21;
+		}
+		.gnb li:nth-child(1){
+			width: 82px;
+			height: 41px;
+			background: url(img/gnb/gnb01.png) no-repeat;
+			top: 65px;
+			left: 10px; 
+		}
+		.gnb li:nth-child(2){
+			width: 82px;
+			height: 42px;
+			background: url(img/gnb/gnb02.png) no-repeat;
+			top: 85px;
+			left: 10px; 
+		}
+		.gnb li:nth-child(3){
+			width: 82px;
+			height: 42px;
+			background: url(img/gnb/gnb03.png) no-repeat;
+			top: 105px;
+			left: 10px; 
+		}
+		.gnb li:nth-child(4){
+			width: 82px;
+			height: 40px;
+			background: url(img/gnb/gnb05.png) no-repeat;
+			top: 125px;
+			left: 10px; 
+		}
+		.gnb li:nth-child(5){
+			width: 82px;
+			height: 48px;
+			background: url(img/gnb/gnb04.png) no-repeat;
+			top: 145px;
+			left: 10px; 
+		}
+		.gnb li:nth-child(6){
+			width: 82px;
+			height: 42px;
+			background: url(img/gnb/gnb06.png) no-repeat;
+			top: 165px;
+			left: 10px; 
+		}
+
+		/*우측네비 hover*/
+		.gnb li:nth-child(1):hover, .gnb li:nth-child(1).active{
+			width: 162px;
+			height: 41px;
+			background: url(img/gnb/gnb01_on.png) no-repeat;
+			top: 65px;	
+			left: -100px;	
+		}
+		.gnb li:nth-child(2):hover, .gnb li:nth-child(2).active{
+			width: 162px;
+			height: 42px;
+			background: url(img/gnb/gnb02_on.png) no-repeat;
+			top: 85px;	
+			left: -100px;
+		}
+		.gnb li:nth-child(3):hover, .gnb li:nth-child(3).active{
+			width: 162px;
+			height: 41px;
+			background: url(img/gnb/gnb03_on.png) no-repeat;
+			top: 105px;	
+			left: -100px;
+		}
+		.gnb li:nth-child(4):hover, .gnb li:nth-child(4).active{
+			width: 148px;
+			height: 35px;
+			background: url(img/gnb/gnb05_on.png) no-repeat;
+			top: 125px;	
+			left: -100px;
+		}
+		.gnb li:nth-child(5):hover, .gnb li:nth-child(5).active{
+			width: 164px;
+			height: 61px;
+			background: url(img/gnb/gnb04_on.png) no-repeat;
+			top: 145px;	
+			left: -100px;
+		}
+		.gnb li:nth-child(6):hover, .gnb li:nth-child(6).active{
+			width: 162px;
+			height: 42px;
+			background: url(img/gnb/gnb06_on.png) no-repeat;
+			top: 165px;	
+			left: -100px;
+		}
+
+		/*첫번째 페이지*/
+		#main .main_content a{
+			position: absolute;
+		}
+		#main .main_content a:nth-child(1){
+			background: url(img/bird_02.png) no-repeat;
+			width: 143.11px;
+			height: 150px;
+			left: 50%;
+			margin-left: -400px;
+			top: 350px;
+			animation: bird02 1s steps(9) infinite;
+		}
+		@keyframes bird02 {
+			0%{}
+			100%{background-position: -1288px;}
+		}
+		#main .main_content a:nth-child(2){
+			background: url(img/bird_01.png)no-repeat;
+			width: 135.8px;
+			height: 206px;
+			right: 50%;
+			margin-right: -450px;
+			top: 350px;
+			animation: bird01 1s steps(15) infinite;
+		}
+		@keyframes bird01{
+			0%{}
+			100%{background-position: -2037px;}
+		}
+		#main .main_content a:nth-child(1):hover{
+			animation-play-state: paused;
+		}
+		#main .main_content a:nth-child(2):hover{
+			animation-play-state: paused;
+		}
+
+		/*움직이는 요소*/
+		#main .planegirl{
+			background: url(img/plane_p.png);
+			background-size: contain;
+			width: 559px;
+			height: 289px;
+			left: 30%;
+			margin-left: -450px;
+			/*top: 250px;*/
+			position: absolute;
+			animation: planegirl 8s infinite;
+			z-index: 14;
+		}
+		@keyframes planegirl {
+			0%{margin-top: -400px; margin-left: -1200px;}
+			100%{margin-left: 250px; margin-top: 1100px;}
+		}
+		#main .mouse{
+			background: url(img/mousewheel.png) no-repeat center;
+			background-size: contain;
+			position: absolute;
+			width: 40px;
+			height: 60px;
+			left: 49%;
+			top: 500px;
+			animation: mouse 1s infinite;
+		}
+		@keyframes mouse {
+			0%{margin-top: 0;}
+			100%{margin-top: 20px;}
+		}
+
+		/*두번째 페이지*/
+		#intro .sign li:nth-child(1){
+			width: 136px;
+			height: 205px;
+			background: url(img/sign_mv.png);
+			position: relative;
+			left: 50%;
+			margin-left: 340px;
+			bottom: -620px;
+			animation: signmv 1s steps(2) infinite;
+			animation-delay: 0.2s;
+		}
+		@keyframes signmv {
+			0%{}
+			100%{background-position: -272px;}
+		}
+		#intro .sign li:nth-child(2){
+			width: 834px;
+			height: 225px;
+			background: url(img/vladi_ms.png);
+			position: relative;
+			left: 50%;
+			margin-left: -780px;
+			bottom: -260px;
+			cursor: pointer;
+			animation: vladims 1s steps(2) infinite;
+		}
+		@keyframes vladims {
+			0%{}
+			100%{background-position: -1672px;}
+		}
+		#intro .sign li:nth-child(2) a>img{
+			opacity: 0;
+		}
+		#intro .sign li:nth-child(3){
+			width: 96px;
+			height: 28px;
+			background: url(img/click2.png);
+			animation: click 1s steps(2) infinite;
+			position: relative;
+			left: 50%;
+		}
+		@keyframes click {
+			0%{}
+			100%{background-position: -191px;}
+		}
+
+		/*세번째 페이지*/
+		#let #fancybox-wrap{
+			width: 430px;
+			height: 326px;
+			position: relative;
+			left: 50%;
+			margin-left: -460px;
+			top: 240px;
+		}
+		#let .map{
+			width: 430px;
+			height: 326px;
+			background: url(img/map.png);
+			position: relative;
+			left: 50%;
+			margin-left: -533px;
+			
+			top: 137px;
+			cursor: pointer;
+			animation: map1 2s infinite;
+		}
+		@keyframes map1{
+			0%{opacity: 0;}
+			25%{opacity: 10;}
+			50%{opacity: 0;}
+			100%{opacity: 10;}
+		}
+
+		/*네번째 페이지*/
+		#event .video{
+			width: 700px;
+			height: 370px;
+			position: relative;
+			top: 171px;
+			left: 50%;
+			margin-left: -600px;
+			z-index: 15;
+		}
+		#evbox{
+			/*border: 1px solid red;*/
+			width: 811px;
+			height: 358px;
+			position: absolute;
+			left: 50%;
+			margin-left: -656px;
+			top: 3120px;
+			overflow: hidden;
+		}
+		#evbox~a>img{
+			width: 270.3px;
+			height: 119.3px;
+		}			
+		
+		/*자동차 움직이는 요소*/
+		#event .car li{
+			/*border: 1px solid blue;*/
+			width: 745.167px;
+			height: 287px;
+			position: relative;
+			overflow: hidden;
+		}
+		#event .car li:nth-child(1){
+			background: url(img/car1.png);
+			left: 50%;
+			/*margin-left: -900px;*/
+			bottom: -210px;
+			animation: car1 1.7s steps(6) infinite;
+			animation-delay: 1s;
+		}
+		@keyframes car1{
+			0%{margin-left: -1500px}
+			99%{margin-left: 500px}
+			100%{background-position: 4471px}
+		}
+		#event .car li:nth-child(2){
+			background: url(img/car2.png);
+			left: 100%;
+			/*margin-left: -200px;*/
+			bottom: -30px;
+			animation: car2 1.5s steps(6) infinite;
+			animation-delay: .1s;
+			z-index: 1;
+		}
+		@keyframes car2{
+			0%{margin-right: 0}
+			99%{margin-left: -3000px}
+			100%{background-position: 4471px}
+		}
+		.car li:nth-child(3){
+			background: url(img/car3.png);
+			left: 50%;
+			/*margin-left: 300px;*/
+			bottom: 350px;
+			animation: car3 1.7s steps(6) infinite;
+			animation-delay: .2s;
+		}
+		@keyframes car3{
+			0%{margin-left: -1500px}
+			99%{margin-left: 1500px}
+			100%{background-position: 4471px}
+		}
+
+		/*다섯번째 페이지*/
+		.listen_content li{
+			position: absolute;
+			z-index: 12;
+		}
+		.listen_content a:nth-child(1) li{
+			width: 93px;
+			height: 112px;
+			background: url(img/spring.png);
+			position: relative;
+			left: 50%;
+			margin-left: -350px;
+			top: 120px;
+			cursor: pointer;
+		}
+		.listen_content a:nth-child(2) li{
+			width: 85px;
+			height: 90px;
+			background: url(img/summer.png);
+			position: relative;
+			left: 50%;
+			margin-left: -210px;
+			top: 20px;
+			cursor: pointer;
+		}
+		.listen_content a:nth-child(3) li{
+			width: 109px;
+			height: 92px;
+			background: url(img/autumn.png);
+			position: relative;
+			left: 50%;
+			margin-left: -358px;
+			top: 60px;
+			cursor: pointer;
+		}
+		.listen_content a:nth-child(4) li{
+			width: 103px;
+			height: 104px;
+			background: url(img/winter.png);
+			position: relative;
+			left: 50%;
+			margin-left: -218px;
+			top: -40px;
+			cursor: pointer;
+		}
+		.listen_content a:nth-child(5) li{
+			background: url(img/season3.png);
+			width: 122px;
+			height: 180px;
+			position: relative;
+			left: 50%;
+			margin-left: 32px;
+			bottom: 221px;
+		}
+
+		/*이벤트 참여문구*/
+		#listen p{
+			position: relative;
+			top:-480px;
+			/*border:1px solid red;*/
+			width: 300px;
+			left: 50%;
+			margin-left: -740px;
+			color:#19A48C;
+		}
+		
+		#listen span{
+			color:#A31EC2;
+			animation:music 1.5s infinite;
+			position: relative;
+		}
+		@keyframes music {
+			0%{top:0;opacity:0;}
+			50%{top:-5px;opacity:1;}
+			100%{top:0;opacity:0;}
+		}
+
+		/*여섯번째 페이지*/
+		#what .what_content li:nth-child(1){
+			width: 163px;
+			height: 408px;
+			background: url(img/bot2.png);
+			left: 50%;
+			margin-left: -500px;
+			top: 100px;
+			position: relative;
+			cursor: pointer;
+			z-index: 10;
+			animation: bot 1s steps(2)infinite;
+		}
+		@keyframes bot {
+			0%{}
+			100%{background-position: -326px;}
+		}
+		#what .what_content li:nth-child(1) a>img{
+			opacity: 0;
+		}
+		#what .what_content li:nth-child(2){
+			width: 1097px;
+			height: 462px;
+			background: url(img/bg_6-1.png) center;
+			bottom: 0;
+			left: 50%;
+			margin-left: -731px;
+			bottom: -113px;
+			position: relative;
+			z-index: 8;
+		}
+		#what .what_content li:nth-child(3){
+			width: 100%;
+			height: 980px;
+			background: url(img/girl.png) center;
+			top: 4900px;
+			position: absolute;
+		}
+		#what .what_content li:nth-child(4){
+			width: 130.86px;
+			height: 64px;
+			background: url(img/talk.png);
+			position: absolute;
+			left: 50%;
+			margin-left: 30px;
+			top: 5450px;
+			animation: talk 2s steps(7) infinite;
+			cursor: pointer;
+			z-index: 8;
+		}
+		@keyframes talk{
+			0%{}
+			100%{background-position: -916px;}
+		}
+		#what .what_content li:nth-child(4) a>img{
+			opacity: 0;
+		}
+		#what .what_content li:nth-child(5){
+			background: url(img/sofaL.png);
+			width: 522px;
+			height: 377px;
+			position: relative;
+			left: 50%;
+			margin-left: -970px;
+			bottom: 860px;
+		}
+		#what .what_content li:nth-child(6){
+			background: url(img/sofaR.png);
+			background-size: contain;
+			width: 524px;
+			height: 362px;
+			position: relative;
+			left: 50%;
+			margin-left: 245px;
+			bottom: 1100px;
+		}
+  	</style>
+</head>
+<body>
+	<div id="wrapper">
+		<div id="nav_lnb">
+			<nav class="lnb">
+				<ul>
+					<li class="active"><a href="#intro">소개</a></li>
+					<li><a href="#let">여기어때</a></li>
+					<li><a href="#event">이벤트</a></li>
+					<li><a href="#listen">들어봐</a></li>
+					<li><a href="#what">이게뭐야</a></li>
+					<div class="train_move">
+						<section class="train"><!-- 열차 --></section>
+					</div>
+				</ul>
+			</nav>
+		</div>
+		<div id="nav_gnb">
+			<nav class="gnb">
+				<ul>
+					<li class="active"><a href="#main">메인</a></li>
+					<li><a href="#intro">소개</a></li>
+					<li><a href="#let">여기어때</a></li>
+					<li><a href="#event">이벤트</a></li>
+					<li><a href="#listen">들어봐</a></li>
+					<li><a href="#what">이게뭐야</a></li>
+				</ul>
+			</nav>
+		</div>
+		<!-- 첫번째 페이지 -->
+		<section id="main">
+			<ul class="main_content">
+				<a href="#intro">
+					<li><!-- 초심자 --></li>
+				</a>
+				<a href="img/ev01.png" target="_blank" class="fancybox">
+					<li><!-- 이벤트 --></li>
+				</a>
+			</ul>
+			<div class="planegirl"><!-- 비행기 소녀 --></div>
+			<div class="mouse"><!-- 마우스 --></div>
+		</section>
+
+		<!-- 두번째 페이지 -->
+		<section id="intro">
+			<ul class="sign">
+				<li><!-- sign --></li>
+				<li class="vladisign">
+					<a href="img/modal/introM01.png" target="_blank" class="fancybox" rel="group2">
+						<img src="img/vladi2.png" alt="">
+					</a>
+					<a href="img/modal/introM02.png" target="_blank" class="fancybox" rel="group2">
+						<img src="img/vladi2.png" alt="">
+					</a>
+					<a href="img/modal/introM03.png" target="_blank" class="fancybox" rel="group2">
+						<img src="img/vladi2.png" alt="">
+					</a>
+					<a href="img/modal/introM04.png" target="_blank" class="fancybox" rel="group2">
+						<img src="img/vladi2.png" alt="">
+					</a>
+				</li>
+				<li><!-- click --></li>
+			</ul>
+		</section>
+		
+		<!-- 세번째 페이지 -->
+		<section id="let">
+			<div class="map">
+				<a href="https://www.google.co.kr/maps/place/%EB%9F%AC%EC%8B%9C%EC%95%84+%ED%94%84%EB%A6%AC%EB%AA%A8%EB%A5%B4%EC%8A%A4%ED%82%A4+%ED%81%AC%EB%A0%88%EC%9D%B4+%EB%B8%94%EB%9D%BC%EB%94%94%EB%B3%B4%EC%8A%A4%ED%86%A0%ED%81%AC/@43.1666908,131.8834184,12z/data=!3m1!4b1!4m5!3m4!1s0x5fb39cba5249d485:0x186704d4dd967e35!8m2!3d43.1332484!4d131.9112975?hl=ko" target="_blank">
+					<img src="img/map.png" alt="">
+				</a>
+			</div>
+		</section>
+
+		<!-- 네번째 페이지 -->
+		<section id="event">
+			<div class="video">
+				<iframe width="690" height="355" src="https://www.youtube.com/embed/AuDbiglM1Xk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+			</div>
+			<div id="evbox">
+				<a class="fancybox" rel="group1" href="img/ev02.png">
+					<img src="img/ev02.png" alt="" />
+				</a>
+				<a class="fancybox" rel="group1" href="img/ev01.png">
+					<img src="img/ev01.png" alt="" />
+				</a>
+				<a class="fancybox" rel="group1" href="img/ev03.png">
+					<img src="img/ev03.png" alt="" />
+				</a>
+			</div>
+			<div class="car">
+				<ul>
+					<li><!-- car1 --></li>
+					<li><!-- car2 --></li>
+					<li><!-- car3 --></li>
+				</ul>
+			</div>
+		</section>
+		
+		<!-- 다섯번째 페이지 -->
+		<section id="listen">
+			<div>
+				<ul class="listen_content">
+					<a><li><!-- 봄 --></li></a>
+					<a href="img/event/event_1.jpg" target="_blank" class="fancybox"><li><!-- 여름 --></li></a>
+					<a href="img/event/event_2.jpg" target="_blank" class="fancybox"><li><!-- 가을 --></li></a>
+					<a href="img/event/event_3.jpg" target="_blank" class="fancybox"><li><!-- 겨울 --></li></a>
+					<a><li><!-- 시즌간판 --></li></a>
+				</ul>
+				<p><span>♬</span>~<span>시즌 이벤트</span>를 진행중입니다~~~~~<span>♪</span><br> 우측 사물함에서 <span>맘에 드는 물건을 클릭하여 <br>이벤트에 참여</span>해 보세요~<span>♪</span></p>
+			</div>
+		</section>
+		
+		<!-- 여섯번째 페이지 -->
+		<section id="what">
+			<ul class="what_content">
+				<li>
+					<a href="https://hanatour.com/com/cuc/CHPC0CUC0001M200" target="_blank">
+						<img src="img/bot.png" alt="">
+					</a>
+				</li>
+				<li><!-- 승무원 --></li>
+				<li><!-- 여캐 --></li>
+				<li>
+					<!-- 말풍선 -->
+					<a href="https://hanatour.com/com/cuc/CHPC0CUC0004M200" target="_blank">
+						<img src="img/talk.png" alt="">
+					</a>
+				</li>
+				<li><!-- 소파1 --></li>
+				<li><!-- 소파2 --></li>
+			</ul>
+		</section>
+
+	</div>
+
+
+	<!-- 제이쿼리 -->
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDT7sSTMO5sgyqu_1l0KuaIK_QAyv0U44c&callback=initMap&libraries=&v=weekly" defer></script>
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha384-nvAa0+6Qg9clwYCGGPpDQLVpLNn0fRaROjHqs13t4Ggj3Ez50XnGQqc/r8MhnRDZ" crossorigin="anonymous"></script> -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	<script>
+		$(function(){
+			
+			
+			//두번째 페이지
+			var img = $(".intro_content li");
+			var list = $(".active li");
+			var sign = $(".vladisign");
+			var x_btn = $(".x_btn");
+			var menu =  $(".gnb li");
+
+			img.hide();
+			img.eq(0).show();
+			list.hide();
+			x_btn.hide();
+
+			sign.click(function(){
+				var i = $(this).index();
+				img.show();
+				img.eq(i).show();
+				x_btn.show();
+				list.removeClass("active");
+				list.addClass("active");
+			})
+			x_btn.click(function(){
+				img.hide();
+				list.hide();
+				x_btn.hide();
+			})
+
+			
+			//네번째 페이지
+			// $(".fancybox").fancybox({
+
+			// })
+
+			//스크롤시 해당 컨텐츠의 메뉴를 활성화
+			var ht =980;
+
+			$(window).scroll(function(){
+				var myScrollTop = $(window).scrollTop();
+				// alert(myScrollTop);
+				if(myScrollTop>=0 && myScrollTop<ht){
+					menu.removeClass("active");
+					menu.eq(0).addClass("active");
+				}else if(myScrollTop>=ht && myScrollTop<ht*2){
+					menu.removeClass("active");
+					menu.eq(1).addClass("active");
+				}else if(myScrollTop>=ht*2 && myScrollTop<ht*3){
+					menu.removeClass("active");
+					menu.eq(2).addClass("active");
+				}else if(myScrollTop>=ht*3 && myScrollTop<ht*4){
+					menu.removeClass("active");
+					menu.eq(3).addClass("active");
+				}else if(myScrollTop>=ht*4 && myScrollTop<ht*5){
+					menu.removeClass("active");
+					menu.eq(4).addClass("active");
+				}else{
+					menu.removeClass("active");
+					menu.eq(5).addClass("active");
+				}
+			})
+			
+			//다섯번째 이벤트 페이지
+			$(".fancybox").fancybox();
+			let event1=$(".listen_content a:nth-child(1)");
+			let event2=$(".listen_content a:nth-child(2)");
+			let event3=$(".listen_content a:nth-child(3)");
+			let event4=$(".listen_content a:nth-child(4)");
+			
+
+			event1.click(function(){
+				alert("꽝~아쉽네요. 다음 기회에 다시 참여해 주세요");
+			})
+			event2.click(function(){
+				alert("와우~축하드려요!! 블라디보스톡 패키지 상품 50%할인권에 당첨되었습니다. 원하는 상품의 당첨코드를 패키지 구매시에 등록해 주세요.");
+			})
+			event3.click(function(){
+				alert("와우~축하드려요!! 블라디보스톡&하바롭스크 패키지 상품 50%할인권에 당첨되었습니다. 원하는 상품의 당첨코드를 패키지 구매시에 등록해 주세요.");
+			})
+			event4.click(function(){
+				alert("와우~축하드려요!! 세미팩&에어텔 50%할인권에 당첨되었습니다. 원하는 상품의 당첨코드를 패키지 구매시에 등록해 주세요.");
+			})
+			
+		})
+	</script>
+</body>
+</html>
